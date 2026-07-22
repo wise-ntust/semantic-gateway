@@ -24,7 +24,7 @@ else
   AP_IP=127.0.0.1; RCV_IP=127.0.0.1
 fi
 
-for POLICY in semantic tail; do
+for POLICY in ${SMOKE_POLICIES:-semantic tail uniform keyframe}; do
   RUN="$OUT/$POLICY"
   mkdir -p "$RUN"
   echo "== policy: $POLICY =="
