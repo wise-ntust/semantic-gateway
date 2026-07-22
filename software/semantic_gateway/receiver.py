@@ -91,6 +91,8 @@ async def amain(args):
     trace = JsonlWriter(run_dir / "trace.jsonl")
     total_recv = 0
     for vid, m in enumerate(manifests):
+        if args.videos and vid >= args.videos:
+            break
         got = sorted(recv.received.get(vid, []))
         total_recv += len(got)
         trace.write({"video_id": vid, "video": m.video, "label": m.label,
@@ -104,6 +106,8 @@ async def amain(args):
 def main():
     ap = argparse.ArgumentParser(description="semantic-gateway receiver")
     ap.add_argument("--manifests", required=True)
+    ap.add_argument("--videos", type=int, default=0,
+                    help="must match the sender's --videos limit")
     ap.add_argument("--listen-host", default="0.0.0.0")
     ap.add_argument("--listen-port", type=int, default=6000)
     ap.add_argument("--proxy-host", default="127.0.0.1")
