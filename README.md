@@ -43,8 +43,8 @@ Same series, opposite direction. One adds redundancy to survive loss; the other 
 | 1 | Baseline pipeline: UCF101 + pretrained action-recognition model, RTP sender → proxy → receiver | planned |
 | 2 | Drop policies: uniform / size-based / sender-tagged, under emulated bandwidth (`tc netem`) | planned |
 | 3 | Frame vs feature: split-point and quantization sweep under an equal bandwidth budget | planned |
-| 4 | On-device: RTP-header drop on ZedBoard ARM PS (openwifi), OpenWrt router as fallback | planned |
-| 5 | Report and paper | planned |
+| 4 | On-device: RTP-header drop on ZedBoard ARM PS (openwifi), as the sighting shot for Phase 5 | planned |
+| 5 | In-fabric: drop module inside the openwifi TX datapath (PL), plus the final report | planned |
 
 ## License
 
