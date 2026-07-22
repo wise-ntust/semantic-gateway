@@ -1,0 +1,136 @@
+"""Drop policies and pressure triggers.
+
+The proxy models the AP: a token-bucket egress link with a bounded queue.
+When the link cannot carry the offered load, something must be dropped.
+Policies differ only in HOW they choose; the link and queue are identical.
+
+Pressure levels (rate-adaptive policies):
+  0: no pressure          keep all frames        (30 fps)
+  1: drop layer 2         keep 1/2 of frames     (15 fps)
+  2: drop layers >= 1     keep 1/4 of frames     (7.5 fps)
+  3: keep I frames only   keep 1/GOP of frames   (~1 fps)
+
+`uniform` mirrors the same keep ratios but picks frames by index, blind to
+layers, so it breaks reference chains. That contrast is the experiment.
+"""
+
+from __future__ import annotations
+
+import time
+from dataclasses import dataclass
+
+from .manifest import GOP
+
+KEEP_MOD = {0: 1, 1: 2, 2: 4, 3: GOP}  # keep frames where i % mod == 0
+
+
+@dataclass
+class QueueState:
+    """What a policy is allowed to see."""
+    queue_bytes: int = 0
+    queue_cap: int = 256 * 1024
+    pressure: int = 0
+
+    @property
+    def occupancy(self) -> float:
+        return self.queue_bytes / self.queue_cap if self.queue_cap else 0.0
+
+
+class Policy:
+    name = "base"
+
+    def admit(self, frame_idx: int, layer: int, diff_q: int, size: int,
+              q: QueueState) -> bool:
+        raise NotImplementedError
+
+
+class TailDrop(Policy):
+    """Blind AP behaviour: admit until the queue is full."""
+    name = "tail"
+
+    def admit(self, frame_idx, layer, diff_q, size, q):
+        return q.queue_bytes + size <= q.queue_cap
+
+
+class UniformDrop(Policy):
+    """Index-blind thinning at the same keep ratio as the semantic policy."""
+    name = "uniform"
+
+    def admit(self, frame_idx, layer, diff_q, size, q):
+        if q.queue_bytes + size > q.queue_cap:
+            return False
+        return frame_idx % KEEP_MOD[q.pressure] == 0
+
+
+class KeyframeProtect(Policy):
+    """Content-aware but task-blind (Gobatto-style): I frames may use the
+    whole queue; non-I frames only the first 90%, so under congestion the
+    remaining headroom is reserved for keyframes."""
+    name = "keyframe"
+    NON_I_FRAC = 0.9
+
+    def admit(self, frame_idx, layer, diff_q, size, q):
+        cap = q.queue_cap if frame_idx % GOP == 0 \
+            else int(q.queue_cap * self.NON_I_FRAC)
+        return q.queue_bytes + size <= cap
+
+
+class SemanticDrop(Policy):
+    """Ours: drop whole temporal layers, highest first."""
+    name = "semantic"
+
+    def admit(self, frame_idx, layer, diff_q, size, q):
+        if q.queue_bytes + size > q.queue_cap:
+            return False
+        if q.pressure == 0:
+            return True
+        if q.pressure == 1:
+            return layer <= 1
+        if q.pressure == 2:
+            return layer == 0
+        return frame_idx % GOP == 0
+
+
+POLICIES: dict[str, type[Policy]] = {
+    p.name: p for p in (TailDrop, UniformDrop, KeyframeProtect, SemanticDrop)
+}
+
+
+@dataclass
+class QueueDepthTrigger:
+    """Instant link-local signal: queue occupancy with hysteresis + dwell."""
+    up: float = 0.70
+    down: float = 0.25
+    dwell_s: float = 0.3
+    level: int = 0
+    _last_change: float | None = None
+
+    def update(self, occupancy: float, now: float | None = None) -> int:
+        now = time.monotonic() if now is None else now
+        if self._last_change is None:
+            self._last_change = now
+            return self.level
+        if now - self._last_change >= self.dwell_s:
+            if occupancy > self.up and self.level < 3:
+                self.level += 1
+                self._last_change = now
+            elif occupancy < self.down and self.level > 0:
+                self.level -= 1
+                self._last_change = now
+        return self.level
+
+
+@dataclass
+class FeedbackTrigger:
+    """Application-layer baseline: reacts to receiver reports (loss ratio),
+    which arrive every report interval instead of instantly."""
+    up: float = 0.05   # escalate above 5% loss
+    down: float = 0.01
+    level: int = 0
+
+    def on_report(self, loss_ratio: float) -> int:
+        if loss_ratio > self.up and self.level < 3:
+            self.level += 1
+        elif loss_ratio < self.down and self.level > 0:
+            self.level -= 1
+        return self.level

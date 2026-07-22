@@ -1,0 +1,20 @@
+[project]
+name = "semantic-gateway"
+version = "0.1.0"
+description = "Semantic-aware frame dropping at the wireless AP - research pipeline"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+model = ["torch", "torchvision", "av", "numpy"]
+test = ["pytest"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["semantic_gateway*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
