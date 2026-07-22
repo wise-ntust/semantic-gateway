@@ -1,0 +1,54 @@
+[
+  {
+    "policy": "keyframe",
+    "budget": 0.5,
+    "seed": 1,
+    "top1": 0.75,
+    "n": 20,
+    "zero_usable": 0,
+    "usable_pct": 17.96,
+    "received_pct": 43.28,
+    "lat_ms_mean": 2153.58,
+    "lat_ms_p99": 2717.9,
+    "run": "keyframe-b0.5-s1"
+  },
+  {
+    "policy": "semantic",
+    "budget": 0.5,
+    "seed": 1,
+    "top1": 0.9,
+    "n": 20,
+    "zero_usable": 0,
+    "usable_pct": 39.93,
+    "received_pct": 39.96,
+    "lat_ms_mean": 1225.22,
+    "lat_ms_p99": 2158.41,
+    "run": "semantic-b0.5-s1"
+  },
+  {
+    "policy": "tail",
+    "budget": 0.5,
+    "seed": 1,
+    "top1": 0.3,
+    "n": 20,
+    "zero_usable": 14,
+    "usable_pct": 17.06,
+    "received_pct": 74.65,
+    "lat_ms_mean": 2578.97,
+    "lat_ms_p99": 2928.96,
+    "run": "tail-b0.5-s1"
+  },
+  {
+    "policy": "uniform",
+    "budget": 0.5,
+    "seed": 1,
+    "top1": 0.8,
+    "n": 20,
+    "zero_usable": 0,
+    "usable_pct": 37.43,
+    "received_pct": 55.18,
+    "lat_ms_mean": 1285.73,
+    "lat_ms_p99": 2084.0,
+    "run": "uniform-b0.5-s1"
+  }
+]

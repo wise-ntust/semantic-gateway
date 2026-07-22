@@ -1,0 +1,10 @@
+{
+  "run_dir": "/tmp/sgw-real-smoke/semantic-b0.5-s1",
+  "frames_total": 3318,
+  "frames_received": 1326,
+  "frames_usable": 1325,
+  "received_pct": 39.96,
+  "usable_pct": 39.93,
+  "lat_ms_mean": 1225.22,
+  "lat_ms_p99": 2158.41
+}

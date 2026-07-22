@@ -1,0 +1,10 @@
+{
+  "run_dir": "/tmp/sgw-real-smoke/tail-b0.5-s1",
+  "frames_total": 3318,
+  "frames_received": 2477,
+  "frames_usable": 566,
+  "received_pct": 74.65,
+  "usable_pct": 17.06,
+  "lat_ms_mean": 2578.97,
+  "lat_ms_p99": 2928.96
+}
