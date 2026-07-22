@@ -1,0 +1,10 @@
+{
+  "run_dir": "/tmp/sgw-real-smoke/keyframe-b0.5-s1",
+  "frames_total": 3318,
+  "frames_received": 1436,
+  "frames_usable": 596,
+  "received_pct": 43.28,
+  "usable_pct": 17.96,
+  "lat_ms_mean": 2153.58,
+  "lat_ms_p99": 2717.9
+}

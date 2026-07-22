@@ -1,0 +1,10 @@
+{
+  "run_dir": "/tmp/sgw-real-smoke/uniform-b0.5-s1",
+  "frames_total": 3318,
+  "frames_received": 1831,
+  "frames_usable": 1242,
+  "received_pct": 55.18,
+  "usable_pct": 37.43,
+  "lat_ms_mean": 1285.73,
+  "lat_ms_p99": 2084.0
+}

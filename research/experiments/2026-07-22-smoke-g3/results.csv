@@ -1,0 +1,5 @@
+policy,budget,seed,top1,n,zero_usable,usable_pct,received_pct,lat_ms_mean,lat_ms_p99,run
+keyframe,0.5,1,0.75,20,0,17.96,43.28,2153.58,2717.9,keyframe-b0.5-s1
+semantic,0.5,1,0.9,20,0,39.93,39.96,1225.22,2158.41,semantic-b0.5-s1
+tail,0.5,1,0.3,20,14,17.06,74.65,2578.97,2928.96,tail-b0.5-s1
+uniform,0.5,1,0.8,20,0,37.43,55.18,1285.73,2084.0,uniform-b0.5-s1
