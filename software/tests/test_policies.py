@@ -25,10 +25,22 @@ def test_semantic_keep_ratios():
     assert len(admitted_set(p, 3, n)) == n // GOP
 
 
-def test_uniform_matches_semantic_keep_ratio():
-    u, s = UniformDrop(), SemanticDrop()
-    for lvl in (1, 2, 3):
-        assert len(admitted_set(u, lvl)) == len(admitted_set(s, lvl))
+def test_uniform_keep_ratio_statistical():
+    u = UniformDrop(seed=7)
+    n = 64 * GOP
+    kept = admitted_set(u, 1, n)
+    assert abs(len(kept) / n - 0.5) < 0.05  # Bernoulli(1/2) within 5%
+
+
+def test_uniform_is_layer_blind():
+    """Uniform must NOT reproduce the temporal-layer pattern."""
+    u = UniformDrop(seed=7)
+    kept = admitted_set(u, 1, 8 * GOP)
+    assert any(i % 2 == 1 for i in kept)   # keeps some L2 frames
+    assert any(i % 2 == 0 for i in kept)   # and some base-layer frames
+    from semantic_gateway.decodability import usable_frames
+    n = 8 * GOP
+    assert usable_frames(kept, n) != kept  # chains do break
 
 
 def test_semantic_survivors_form_decodable_set():
