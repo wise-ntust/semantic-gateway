@@ -41,7 +41,10 @@ class Proxy(asyncio.DatagramProtocol):
         self.args = args
         self.events = events
         self.policy = POLICIES[args.policy](seed=args.seed)
-        self.q = QueueState(queue_cap=args.queue_cap)
+        base_rate = parse_schedule(args.rate)[0][1]
+        cap = (int(base_rate * args.queue_ms / 1000)
+               if args.queue_ms else args.queue_cap)
+        self.q = QueueState(queue_cap=max(cap, 2 * (rtp.HEADER_LEN + rtp.MTU_PAYLOAD)))
         self.queue: deque[bytes] = deque()
         self.schedule = parse_schedule(args.rate)
         self.trigger_mode = args.trigger
@@ -175,7 +178,11 @@ def main():
     ap.add_argument("--trigger", choices=["queue", "feedback"], default="queue")
     ap.add_argument("--rate", default="0:2.5e6",
                     help="schedule t_sec:bytes_per_sec[,t:r...]")
-    ap.add_argument("--queue-cap", type=int, default=256 * 1024)
+    ap.add_argument("--queue-cap", type=int, default=256 * 1024,
+                    help="fixed queue cap in bytes (used if --queue-ms 0)")
+    ap.add_argument("--queue-ms", type=float, default=100.0,
+                    help="size queue from base link rate x this latency; "
+                         "0 = use --queue-cap")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--listen-host", default="0.0.0.0")
     ap.add_argument("--listen-port", type=int, default=5000)

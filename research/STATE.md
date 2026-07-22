@@ -1,10 +1,11 @@
 # semantic-gateway 研究 pipeline 狀態
-stage: implementation
+stage: experiments
 venue: 不投稿。deliverable = 可重現實驗 + REPORT.md（對齊 coding-gateway 格式）
 
 ## Gates
 - [x] G1 proposal 核准（2026-07-22）
 - [x] G2 環境 + 實驗計畫核准（2026-07-22）
+- [x] G3 實作驗收（2026-07-22，smoke 通過，H1 機制可見）
 - [ ] G3 實作驗收（pipeline end-to-end 會動）
 - [ ] G4 實驗結果過目（數據真實且足夠）
 - [ ] G5 報告草稿核准
