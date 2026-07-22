@@ -42,6 +42,12 @@ venue: 不投稿。deliverable = 可重現實驗 + REPORT.md（對齊 coding-gat
 - queue cap 改用鏈路 RTT 換算，不用固定 256KB
 - ≥5 seeds + error bar（plan.md rigor budget）
 
+## Stage 4 進度（2026-07-22）
+- G3 三修完成：subset_manifests（分層 3/class=303 支）、proxy --queue-ms（依鏈路 rate 換算，預設 100ms）、aggregate（跨 seed mean±std）
+- RQ1 網路掃描啟動：4 policy × 6 budget（1.0/0.75/0.5/0.375/0.25/0.125）× 3 seed = 72 runs
+- 單 config 約 4m24s（303 支、x8）；全掃描約 5.3h，resumable（跳過有 summary.json 的）
+- 掃描完 → king eval_all 算 accuracy → aggregate 出 mean±std → results.md → G4
+
 ## Open questions
 - 津貼與 ZedBoard 排程（等 twisc 確定）
 - feature path（RQ3）的 feature 壓縮格式：int8 quantization 起手，top-k 備選（實作時定）
