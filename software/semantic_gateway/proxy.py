@@ -40,7 +40,7 @@ class Proxy(asyncio.DatagramProtocol):
     def __init__(self, args, events: JsonlWriter):
         self.args = args
         self.events = events
-        self.policy = POLICIES[args.policy]()
+        self.policy = POLICIES[args.policy](seed=args.seed)
         self.q = QueueState(queue_cap=args.queue_cap)
         self.queue: deque[bytes] = deque()
         self.schedule = parse_schedule(args.rate)
@@ -176,6 +176,7 @@ def main():
     ap.add_argument("--rate", default="0:2.5e6",
                     help="schedule t_sec:bytes_per_sec[,t:r...]")
     ap.add_argument("--queue-cap", type=int, default=256 * 1024)
+    ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--listen-host", default="0.0.0.0")
     ap.add_argument("--listen-port", type=int, default=5000)
     ap.add_argument("--receiver-host", default="127.0.0.1")

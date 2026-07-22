@@ -43,3 +43,15 @@
 - Windows ssh 不吃 `;` 串接、輸出是 UTF-16（`tr -d '\0'` 處理）。
 - king 無 WSL：mmaction2 放棄，torchvision 模型 zoo 就夠。
 - `QueueDepthTrigger` 的 dwell 基準時間要 lazy init，不然測試沒法注入時鐘。
+- **uniform baseline 不能用 `i % mod == 0`**：temporal layer 本身就是
+  index 奇偶 pattern，modulo 抽樣會跟 semantic policy 完全重合（偽 baseline）。
+  改成 seeded Bernoulli。第一次 smoke 之後才發現。
+- **layer drop 省的是 frame 數不是 bytes**：L2 佔 50% frames 但只佔 ~21% bytes，
+  所以 semantic 在同 byte 預算下會走到比表面 keep-ratio 更深的 level。
+  公平性由共同的 token-bucket link rate 保證，不用 keep-ratio 對齊。
+
+## 第一次 smoke（synthetic，50% 頻寬，2026-07-22）
+
+semantic：received 29.1% / usable 24.4% / mean 146ms
+tail：received 82.1% / usable **7.9%** / mean 269ms
+→ 同鏈路下 semantic 可用 frame 是 tail 的 3 倍，H1 方向正確。

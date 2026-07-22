@@ -16,6 +16,7 @@ layers, so it breaks reference chains. That contrast is the experiment.
 
 from __future__ import annotations
 
+import random
 import time
 from dataclasses import dataclass
 
@@ -39,6 +40,9 @@ class QueueState:
 class Policy:
     name = "base"
 
+    def __init__(self, seed: int = 0):
+        self.seed = seed
+
     def admit(self, frame_idx: int, layer: int, diff_q: int, size: int,
               q: QueueState) -> bool:
         raise NotImplementedError
@@ -53,13 +57,23 @@ class TailDrop(Policy):
 
 
 class UniformDrop(Policy):
-    """Index-blind thinning at the same keep ratio as the semantic policy."""
+    """Layer-blind random thinning at the same keep-ratio ladder as the
+    semantic policy (seeded Bernoulli per frame).
+
+    NOT `frame_idx % mod == 0`: temporal layers are index-parity based, so a
+    modulo rule would accidentally reproduce the semantic policy exactly.
+    Random thinning is what an AP that cannot read tags could actually do,
+    and it breaks reference chains — that contrast is the experiment."""
     name = "uniform"
+
+    def __init__(self, seed: int = 0):
+        super().__init__(seed)
+        self.rng = random.Random(seed)
 
     def admit(self, frame_idx, layer, diff_q, size, q):
         if q.queue_bytes + size > q.queue_cap:
             return False
-        return frame_idx % KEEP_MOD[q.pressure] == 0
+        return self.rng.random() < 1.0 / KEEP_MOD[q.pressure]
 
 
 class KeyframeProtect(Policy):
