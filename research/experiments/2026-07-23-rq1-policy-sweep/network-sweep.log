@@ -1,0 +1,434 @@
+base stream rate: 39184 B/s (videos=0 speed=x8 queue=100ms)
+[1/72] semantic b=1.0 s=0 rate=0:313472
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 46539 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b1.0-s0/trace.jsonl
+  "received_pct": 85.29,
+  "usable_pct": 81.65,
+  "lat_ms_mean": 16.41,
+[2/72] tail b=1.0 s=0 rate=0:313472
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 51126 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b1.0-s0/trace.jsonl
+  "received_pct": 93.7,
+  "usable_pct": 68.36,
+  "lat_ms_mean": 34.54,
+[3/72] uniform b=1.0 s=0 rate=0:313472
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 47657 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b1.0-s0/trace.jsonl
+  "received_pct": 87.34,
+  "usable_pct": 73.4,
+  "lat_ms_mean": 15.99,
+[4/72] keyframe b=1.0 s=0 rate=0:313472
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 50829 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b1.0-s0/trace.jsonl
+  "received_pct": 93.16,
+  "usable_pct": 70.86,
+  "lat_ms_mean": 31.38,
+[5/72] semantic b=0.75 s=0 rate=0:235104
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 39638 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b0.75-s0/trace.jsonl
+  "received_pct": 72.65,
+  "usable_pct": 63.99,
+  "lat_ms_mean": 25.16,
+[6/72] tail b=0.75 s=0 rate=0:235104
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 46862 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b0.75-s0/trace.jsonl
+  "received_pct": 85.89,
+  "usable_pct": 43.34,
+  "lat_ms_mean": 52.41,
+[7/72] uniform b=0.75 s=0 rate=0:235104
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 41632 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b0.75-s0/trace.jsonl
+  "received_pct": 76.3,
+  "usable_pct": 52.12,
+  "lat_ms_mean": 25.43,
+[8/72] keyframe b=0.75 s=0 rate=0:235104
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 46501 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b0.75-s0/trace.jsonl
+  "received_pct": 85.22,
+  "usable_pct": 45.66,
+  "lat_ms_mean": 47.55,
+[9/72] semantic b=0.5 s=0 rate=0:156736
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 29353 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b0.5-s0/trace.jsonl
+  "received_pct": 53.8,
+  "usable_pct": 36.63,
+  "lat_ms_mean": 36.21,
+[10/72] tail b=0.5 s=0 rate=0:156736
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 39229 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b0.5-s0/trace.jsonl
+  "received_pct": 71.9,
+  "usable_pct": 18.78,
+  "lat_ms_mean": 68.08,
+[11/72] uniform b=0.5 s=0 rate=0:156736
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 32283 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b0.5-s0/trace.jsonl
+  "received_pct": 59.17,
+  "usable_pct": 24.07,
+  "lat_ms_mean": 37.09,
+[12/72] keyframe b=0.5 s=0 rate=0:156736
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 39022 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b0.5-s0/trace.jsonl
+  "received_pct": 71.52,
+  "usable_pct": 19.82,
+  "lat_ms_mean": 60.95,
+[13/72] semantic b=0.375 s=0 rate=0:117552
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 23935 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b0.375-s0/trace.jsonl
+  "received_pct": 43.87,
+  "usable_pct": 20.34,
+  "lat_ms_mean": 44.62,
+[14/72] tail b=0.375 s=0 rate=0:117552
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 33277 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b0.375-s0/trace.jsonl
+  "received_pct": 60.99,
+  "usable_pct": 6.69,
+  "lat_ms_mean": 73.5,
+[15/72] uniform b=0.375 s=0 rate=0:117552
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 26483 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b0.375-s0/trace.jsonl
+  "received_pct": 48.54,
+  "usable_pct": 11.58,
+  "lat_ms_mean": 42.22,
+[16/72] keyframe b=0.375 s=0 rate=0:117552
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 33018 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b0.375-s0/trace.jsonl
+  "received_pct": 60.51,
+  "usable_pct": 7.22,
+  "lat_ms_mean": 65.18,
+[17/72] semantic b=0.25 s=0 rate=0:78368
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 17940 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b0.25-s0/trace.jsonl
+  "received_pct": 32.88,
+  "usable_pct": 4.73,
+  "lat_ms_mean": 43.75,
+[18/72] tail b=0.25 s=0 rate=0:78368
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 24853 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b0.25-s0/trace.jsonl
+  "received_pct": 45.55,
+  "usable_pct": 0.66,
+  "lat_ms_mean": 72.47,
+[19/72] uniform b=0.25 s=0 rate=0:78368
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 19929 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b0.25-s0/trace.jsonl
+  "received_pct": 36.52,
+  "usable_pct": 1.79,
+  "lat_ms_mean": 44.08,
+[20/72] keyframe b=0.25 s=0 rate=0:78368
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 24783 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b0.25-s0/trace.jsonl
+  "received_pct": 45.42,
+  "usable_pct": 0.53,
+  "lat_ms_mean": 63.33,
+[21/72] semantic b=0.125 s=0 rate=0:39184
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 12297 complete frames across 302 videos -> /tmp/sgw-rq1/semantic-b0.125-s0/trace.jsonl
+  "received_pct": 22.54,
+  "usable_pct": 0.03,
+  "lat_ms_mean": 44.66,
+[22/72] tail b=0.125 s=0 rate=0:39184
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 14130 complete frames across 302 videos -> /tmp/sgw-rq1/tail-b0.125-s0/trace.jsonl
+  "received_pct": 25.9,
+  "usable_pct": 0.0,
+  "lat_ms_mean": 61.05,
+[23/72] uniform b=0.125 s=0 rate=0:39184
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 12584 complete frames across 302 videos -> /tmp/sgw-rq1/uniform-b0.125-s0/trace.jsonl
+  "received_pct": 23.06,
+  "usable_pct": 0.0,
+  "lat_ms_mean": 45.52,
+[24/72] keyframe b=0.125 s=0 rate=0:39184
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 14033 complete frames across 302 videos -> /tmp/sgw-rq1/keyframe-b0.125-s0/trace.jsonl
+  "received_pct": 25.72,
+  "usable_pct": 0.0,
+  "lat_ms_mean": 51.34,
+[25/72] semantic b=1.0 s=1 rate=0:313472
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 46545 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b1.0-s1/trace.jsonl
+  "received_pct": 85.31,
+  "usable_pct": 81.75,
+  "lat_ms_mean": 16.93,
+[26/72] tail b=1.0 s=1 rate=0:313472
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 51231 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b1.0-s1/trace.jsonl
+  "received_pct": 93.89,
+  "usable_pct": 69.09,
+  "lat_ms_mean": 35.22,
+[27/72] uniform b=1.0 s=1 rate=0:313472
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 47506 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b1.0-s1/trace.jsonl
+  "received_pct": 87.07,
+  "usable_pct": 72.85,
+  "lat_ms_mean": 16.14,
+[28/72] keyframe b=1.0 s=1 rate=0:313472
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 50947 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b1.0-s1/trace.jsonl
+  "received_pct": 93.37,
+  "usable_pct": 71.74,
+  "lat_ms_mean": 32.27,
+[29/72] semantic b=0.75 s=1 rate=0:235104
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 39142 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b0.75-s1/trace.jsonl
+  "received_pct": 71.74,
+  "usable_pct": 62.93,
+  "lat_ms_mean": 25.9,
+[30/72] tail b=0.75 s=1 rate=0:235104
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 46838 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b0.75-s1/trace.jsonl
+  "received_pct": 85.84,
+  "usable_pct": 42.04,
+  "lat_ms_mean": 53.39,
+[31/72] uniform b=0.75 s=1 rate=0:235104
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 41402 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b0.75-s1/trace.jsonl
+  "received_pct": 75.88,
+  "usable_pct": 50.86,
+  "lat_ms_mean": 25.73,
+[32/72] keyframe b=0.75 s=1 rate=0:235104
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 46467 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b0.75-s1/trace.jsonl
+  "received_pct": 85.16,
+  "usable_pct": 44.63,
+  "lat_ms_mean": 48.27,
+[33/72] semantic b=0.5 s=1 rate=0:156736
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 29458 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b0.5-s1/trace.jsonl
+  "received_pct": 53.99,
+  "usable_pct": 36.17,
+  "lat_ms_mean": 37.27,
+[34/72] tail b=0.5 s=1 rate=0:156736
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 39165 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b0.5-s1/trace.jsonl
+  "received_pct": 71.78,
+  "usable_pct": 18.57,
+  "lat_ms_mean": 67.47,
+[35/72] uniform b=0.5 s=1 rate=0:156736
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 31981 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b0.5-s1/trace.jsonl
+  "received_pct": 58.61,
+  "usable_pct": 23.56,
+  "lat_ms_mean": 36.68,
+[36/72] keyframe b=0.5 s=1 rate=0:156736
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 39021 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b0.5-s1/trace.jsonl
+  "received_pct": 71.52,
+  "usable_pct": 19.35,
+  "lat_ms_mean": 60.38,
+[37/72] semantic b=0.375 s=1 rate=0:117552
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 22911 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b0.375-s1/trace.jsonl
+  "received_pct": 41.99,
+  "usable_pct": 20.89,
+  "lat_ms_mean": 43.07,
+[38/72] tail b=0.375 s=1 rate=0:117552
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 33250 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b0.375-s1/trace.jsonl
+  "received_pct": 60.94,
+  "usable_pct": 6.62,
+  "lat_ms_mean": 73.46,
+[39/72] uniform b=0.375 s=1 rate=0:117552
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 26384 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b0.375-s1/trace.jsonl
+  "received_pct": 48.36,
+  "usable_pct": 11.56,
+  "lat_ms_mean": 42.34,
+[40/72] keyframe b=0.375 s=1 rate=0:117552
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 32996 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b0.375-s1/trace.jsonl
+  "received_pct": 60.47,
+  "usable_pct": 6.84,
+  "lat_ms_mean": 65.28,
+[41/72] semantic b=0.25 s=1 rate=0:78368
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 18096 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b0.25-s1/trace.jsonl
+  "received_pct": 33.17,
+  "usable_pct": 5.0,
+  "lat_ms_mean": 43.5,
+[42/72] tail b=0.25 s=1 rate=0:78368
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 24819 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b0.25-s1/trace.jsonl
+  "received_pct": 45.49,
+  "usable_pct": 0.59,
+  "lat_ms_mean": 72.71,
+[43/72] uniform b=0.25 s=1 rate=0:78368
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 19575 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b0.25-s1/trace.jsonl
+  "received_pct": 35.88,
+  "usable_pct": 1.56,
+  "lat_ms_mean": 42.6,
+[44/72] keyframe b=0.25 s=1 rate=0:78368
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 24835 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b0.25-s1/trace.jsonl
+  "received_pct": 45.52,
+  "usable_pct": 0.6,
+  "lat_ms_mean": 63.42,
+[45/72] semantic b=0.125 s=1 rate=0:39184
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 11980 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b0.125-s1/trace.jsonl
+  "received_pct": 21.96,
+  "usable_pct": 0.01,
+  "lat_ms_mean": 45.06,
+[46/72] tail b=0.125 s=1 rate=0:39184
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 14113 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b0.125-s1/trace.jsonl
+  "received_pct": 25.87,
+  "usable_pct": 0.0,
+  "lat_ms_mean": 61.03,
+[47/72] uniform b=0.125 s=1 rate=0:39184
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 12591 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b0.125-s1/trace.jsonl
+  "received_pct": 23.08,
+  "usable_pct": 0.0,
+  "lat_ms_mean": 44.72,
+[48/72] keyframe b=0.125 s=1 rate=0:39184
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 14049 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b0.125-s1/trace.jsonl
+  "received_pct": 25.75,
+  "usable_pct": 0.0,
+  "lat_ms_mean": 51.39,
+[49/72] semantic b=1.0 s=2 rate=0:313472
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 46910 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b1.0-s2/trace.jsonl
+  "received_pct": 85.97,
+  "usable_pct": 81.78,
+  "lat_ms_mean": 16.54,
+[50/72] tail b=1.0 s=2 rate=0:313472
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 51128 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b1.0-s2/trace.jsonl
+  "received_pct": 93.7,
+  "usable_pct": 68.72,
+  "lat_ms_mean": 34.36,
+[51/72] uniform b=1.0 s=2 rate=0:313472
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 47707 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b1.0-s2/trace.jsonl
+  "received_pct": 87.43,
+  "usable_pct": 73.73,
+  "lat_ms_mean": 15.3,
+[52/72] keyframe b=1.0 s=2 rate=0:313472
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 50811 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b1.0-s2/trace.jsonl
+  "received_pct": 93.12,
+  "usable_pct": 71.94,
+  "lat_ms_mean": 31.7,
+[53/72] semantic b=0.75 s=2 rate=0:235104
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 39649 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b0.75-s2/trace.jsonl
+  "received_pct": 72.67,
+  "usable_pct": 64.07,
+  "lat_ms_mean": 25.25,
+[54/72] tail b=0.75 s=2 rate=0:235104
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 46840 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b0.75-s2/trace.jsonl
+  "received_pct": 85.85,
+  "usable_pct": 42.43,
+  "lat_ms_mean": 52.2,
+[55/72] uniform b=0.75 s=2 rate=0:235104
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 41342 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b0.75-s2/trace.jsonl
+  "received_pct": 75.77,
+  "usable_pct": 51.06,
+  "lat_ms_mean": 25.03,
+[56/72] keyframe b=0.75 s=2 rate=0:235104
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 46442 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b0.75-s2/trace.jsonl
+  "received_pct": 85.12,
+  "usable_pct": 45.09,
+  "lat_ms_mean": 47.15,
+[57/72] semantic b=0.5 s=2 rate=0:156736
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 29776 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b0.5-s2/trace.jsonl
+  "received_pct": 54.57,
+  "usable_pct": 35.93,
+  "lat_ms_mean": 38.01,
+[58/72] tail b=0.5 s=2 rate=0:156736
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 39187 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b0.5-s2/trace.jsonl
+  "received_pct": 71.82,
+  "usable_pct": 18.93,
+  "lat_ms_mean": 67.73,
+[59/72] uniform b=0.5 s=2 rate=0:156736
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 32303 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b0.5-s2/trace.jsonl
+  "received_pct": 59.2,
+  "usable_pct": 23.62,
+  "lat_ms_mean": 36.6,
+[60/72] keyframe b=0.5 s=2 rate=0:156736
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 38973 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b0.5-s2/trace.jsonl
+  "received_pct": 71.43,
+  "usable_pct": 19.69,
+  "lat_ms_mean": 60.99,
+[61/72] semantic b=0.375 s=2 rate=0:117552
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 23634 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b0.375-s2/trace.jsonl
+  "received_pct": 43.32,
+  "usable_pct": 20.65,
+  "lat_ms_mean": 43.63,
+[62/72] tail b=0.375 s=2 rate=0:117552
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 33216 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b0.375-s2/trace.jsonl
+  "received_pct": 60.88,
+  "usable_pct": 6.66,
+  "lat_ms_mean": 73.34,
+[63/72] uniform b=0.375 s=2 rate=0:117552
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 26350 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b0.375-s2/trace.jsonl
+  "received_pct": 48.29,
+  "usable_pct": 11.18,
+  "lat_ms_mean": 42.95,
+[64/72] keyframe b=0.375 s=2 rate=0:117552
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 33000 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b0.375-s2/trace.jsonl
+  "received_pct": 60.48,
+  "usable_pct": 6.88,
+  "lat_ms_mean": 65.1,
+[65/72] semantic b=0.25 s=2 rate=0:78368
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 17951 complete frames across 303 videos -> /tmp/sgw-rq1/semantic-b0.25-s2/trace.jsonl
+  "received_pct": 32.9,
+  "usable_pct": 4.66,
+  "lat_ms_mean": 44.09,
+[66/72] tail b=0.25 s=2 rate=0:78368
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 24879 complete frames across 303 videos -> /tmp/sgw-rq1/tail-b0.25-s2/trace.jsonl
+  "received_pct": 45.6,
+  "usable_pct": 0.58,
+  "lat_ms_mean": 72.65,
+[67/72] uniform b=0.25 s=2 rate=0:78368
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 19377 complete frames across 303 videos -> /tmp/sgw-rq1/uniform-b0.25-s2/trace.jsonl
+  "received_pct": 35.51,
+  "usable_pct": 1.71,
+  "lat_ms_mean": 42.77,
+[68/72] keyframe b=0.25 s=2 rate=0:78368
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 24792 complete frames across 303 videos -> /tmp/sgw-rq1/keyframe-b0.25-s2/trace.jsonl
+  "received_pct": 45.44,
+  "usable_pct": 0.6,
+  "lat_ms_mean": 63.49,
+[69/72] semantic b=0.125 s=2 rate=0:39184
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 11991 complete frames across 302 videos -> /tmp/sgw-rq1/semantic-b0.125-s2/trace.jsonl
+  "received_pct": 21.98,
+  "usable_pct": 0.0,
+  "lat_ms_mean": 44.8,
+[70/72] tail b=0.125 s=2 rate=0:39184
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 14060 complete frames across 302 videos -> /tmp/sgw-rq1/tail-b0.125-s2/trace.jsonl
+  "received_pct": 25.77,
+  "usable_pct": 0.0,
+  "lat_ms_mean": 61.15,
+[71/72] uniform b=0.125 s=2 rate=0:39184
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 12460 complete frames across 302 videos -> /tmp/sgw-rq1/uniform-b0.125-s2/trace.jsonl
+  "received_pct": 22.84,
+  "usable_pct": 0.0,
+  "lat_ms_mean": 44.61,
+[72/72] keyframe b=0.125 s=2 rate=0:39184
+sender: 54563 frames / 303 videos in 263.3s (speed x8.0)
+receiver: 14032 complete frames across 302 videos -> /tmp/sgw-rq1/keyframe-b0.125-s2/trace.jsonl
+  "received_pct": 25.72,
+  "usable_pct": 0.0,
+  "lat_ms_mean": 51.35,
+sweep complete under /tmp/sgw-rq1 (72 runs)

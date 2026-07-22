@@ -48,6 +48,16 @@ venue: 不投稿。deliverable = 可重現實驗 + REPORT.md（對齊 coding-gat
 - 單 config 約 4m24s（303 支、x8）；全掃描約 5.3h，resumable（跳過有 summary.json 的）
 - 掃描完 → king eval_all 算 accuracy → aggregate 出 mean±std → results.md → G4
 
+## RQ1 結果（2026-07-23，72 runs 完成）
+- H1 強力成立：semantic 在 0.25-1.0 每個預算都贏，超出誤差條（std ≤ 0.03）
+- top-1（budget: semantic / uniform / keyframe / tail）：
+  1.0: .952/.933/.865/.827  0.75: .923/.866/.711/.640  0.5: .841/.715/.367/.320
+  0.375: .684/.523/.191/.166  0.25: .321/.206/.042/.035  0.125: 全崩
+- 領先幅度中頻寬最大（+12.6pp@0.5、+16.1pp@0.375）
+- 意外發現：keyframe（content-aware 但 task-blind）輸給 uniform → task-aware 才是勝因，強化對 Gobatto 的區隔
+- 資料：research/experiments/2026-07-23-rq1-policy-sweep/，results.md 已寫
+- 無 claim 被推翻
+
 ## Open questions
 - 津貼與 ZedBoard 排程（等 twisc 確定）
 - feature path（RQ3）的 feature 壓縮格式：int8 quantization 起手，top-k 備選（實作時定）
