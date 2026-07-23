@@ -1,0 +1,8 @@
+{
+  "split": "layer4",
+  "quant": "int8",
+  "bytes_per_clip": 50184,
+  "top1": 0.9505,
+  "n": 303,
+  "trace": null
+}

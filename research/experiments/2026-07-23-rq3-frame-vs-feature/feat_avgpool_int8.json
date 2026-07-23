@@ -1,0 +1,8 @@
+{
+  "split": "avgpool",
+  "quant": "int8",
+  "bytes_per_clip": 520,
+  "top1": 0.9505,
+  "n": 303,
+  "trace": null
+}
