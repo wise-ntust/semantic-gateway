@@ -22,6 +22,11 @@ def analyze(run_dir: Path) -> dict:
     rates = [(e["t"], e["bps"]) for e in events if e.get("ev") == "rate"]
     levels = [(e["t"], e["level"]) for e in events if e.get("ev") == "level"]
     drops = [e["t"] for e in events if e.get("ev") == "drop"]
+    # overflow drops are logged every time (not sampled): mid-frame queue
+    # overflow that severs a reference chain. This is the damage a lagging
+    # trigger causes before it reacts.
+    overflow = [e["t"] for e in events
+                if e.get("ev") == "drop" and e.get("reason") == "overflow"]
 
     # step-downs: a rate event lower than the previous rate
     stepdowns = []
@@ -43,8 +48,17 @@ def analyze(run_dir: Path) -> dict:
         if e.get("ev") == "level":
             trigger = e.get("trigger")
             break
+    # overflow drops between the first step-down and the trigger's reaction
+    overflow_in_gap = 0
+    if stepdowns:
+        t0 = stepdowns[0]
+        up = [t for t, lv in levels if t >= t0 and lv > 0]
+        if up:
+            overflow_in_gap = sum(1 for t in overflow if t0 <= t < up[0])
     summ = next((e for e in events if e.get("ev") == "summary"), {})
     return {"trigger": trigger, "stepdowns": results,
+            "overflow_total": len(overflow),
+            "overflow_in_gap": overflow_in_gap,
             "total_dropped": summ.get("dropped"),
             "final_level": levels[-1][1] if levels else 0}
 

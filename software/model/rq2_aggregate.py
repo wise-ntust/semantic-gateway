@@ -20,8 +20,11 @@ from analyze_trigger import analyze
 def stat(xs):
     xs = [x for x in xs if x is not None]
     if not xs:
-        return None, None
-    return statistics.fmean(xs), (statistics.stdev(xs) if len(xs) > 1 else 0.0)
+        return None, None, None
+    mean = statistics.fmean(xs)
+    med = statistics.median(xs)
+    sd = statistics.stdev(xs) if len(xs) > 1 else 0.0
+    return mean, med, sd
 
 
 def main() -> None:
@@ -35,7 +38,7 @@ def main() -> None:
     for pair in args.dirs:
         label, path = pair.split("=", 1)
         root = Path(path)
-        adapts, gaps = [], []
+        adapts, ovf_gap, ovf_total = [], [], []
         per_run = []
         for run in sorted(d for d in root.iterdir() if (d / "events.jsonl").exists()):
             res = analyze(run)
@@ -43,21 +46,27 @@ def main() -> None:
             for sd in res["stepdowns"]:
                 if sd["adapt_ms"] is not None:
                     adapts.append(sd["adapt_ms"])
-                gaps.append(sd["drops_in_gap"])
+            ovf_gap.append(res["overflow_in_gap"])
+            ovf_total.append(res["overflow_total"])
             per_run.append({"run": run.name, **res})
-        a_m, a_s = stat(adapts)
-        g_m, g_s = stat(gaps)
-        report[label] = {"n_runs": len(per_run),
-                         "adapt_ms_mean": a_m, "adapt_ms_std": a_s,
-                         "drops_in_gap_mean": g_m, "drops_in_gap_std": g_s,
+        a_m, a_med, a_s = stat(adapts)
+        og_m, og_med, _ = stat(ovf_gap)
+        ot_m, ot_med, _ = stat(ovf_total)
+        report[label] = {"n_runs": len(per_run), "n_adapted": len(adapts),
+                         "adapt_ms_mean": a_m, "adapt_ms_median": a_med,
+                         "adapt_ms_std": a_s,
+                         "overflow_in_gap_mean": og_m,
+                         "overflow_total_mean": ot_m,
                          "runs": per_run}
 
     args.out.write_text(json.dumps(report, indent=2))
-    print(f"{'trigger':<10}{'runs':>6}{'adapt_ms':>16}{'drops_in_gap':>16}")
+    print(f"{'trigger':<10}{'adapted':>8}{'adapt_ms(med)':>16}"
+          f"{'ovf_in_gap':>12}{'ovf_total':>11}")
     for label, r in report.items():
-        a = f"{r['adapt_ms_mean']:.0f}±{r['adapt_ms_std']:.0f}" if r["adapt_ms_mean"] is not None else "NA"
-        g = f"{r['drops_in_gap_mean']:.0f}±{r['drops_in_gap_std']:.0f}" if r["drops_in_gap_mean"] is not None else "NA"
-        print(f"{label:<10}{r['n_runs']:>6}{a:>16}{g:>16}")
+        a = (f"{r['adapt_ms_median']:.0f} (μ{r['adapt_ms_mean']:.0f})"
+             if r["adapt_ms_median"] is not None else "NA")
+        print(f"{label:<10}{r['n_adapted']:>3}/{r['n_runs']:<4}{a:>16}"
+              f"{r['overflow_in_gap_mean']:>12.0f}{r['overflow_total_mean']:>11.0f}")
     print(f"\nwrote {args.out}")
 
 

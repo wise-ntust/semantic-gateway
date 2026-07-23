@@ -73,10 +73,13 @@ env_snapshot() {  # $1 = run dir
 }
 
 NS_AP=(); NS_SND=(); NS_RCV=()
-AP_IP=127.0.0.1; RCV_IP=127.0.0.1
+# AP_IP: how the SENDER reaches the AP. AP_IP_RCV: how the RECEIVER reaches it
+# (for feedback packets). In the netns these are different interfaces of the AP;
+# the receiver's namespace cannot route to the sender-side AP IP.
+AP_IP=127.0.0.1; AP_IP_RCV=127.0.0.1; RCV_IP=127.0.0.1
 if ip netns list 2>/dev/null | grep -q sgw-ap; then
   NS_AP=(ip netns exec sgw-ap); NS_SND=(ip netns exec sgw-snd); NS_RCV=(ip netns exec sgw-rcv)
-  AP_IP=10.77.1.1; RCV_IP=10.77.2.2
+  AP_IP=10.77.1.1; AP_IP_RCV=10.77.2.1; RCV_IP=10.77.2.2
 fi
 
 TOTAL=0; DONE=0
@@ -95,7 +98,7 @@ for SEED in $SEEDS; do
       else RATE="0:$(awk "BEGIN{printf \"%.0f\", $BUDGET * $BASE_RATE * $SPEED}")"; fi
       echo "[$DONE/$TOTAL] $POLICY b=$BUDGET s=$SEED rate=$RATE"
       "${NS_RCV[@]}" $PY -m semantic_gateway.receiver --manifests "$MANIFESTS" \
-        --videos "$VIDEOS" --run-dir "$RUN" --timeout 7200 --proxy-host "$AP_IP" &
+        --videos "$VIDEOS" --run-dir "$RUN" --timeout 7200 --proxy-host "$AP_IP_RCV" &
       RCV_PID=$!
       sleep 0.5
       "${NS_AP[@]}" $PY -m semantic_gateway.proxy --policy "$POLICY" \
