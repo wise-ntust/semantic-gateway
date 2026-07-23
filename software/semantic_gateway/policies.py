@@ -136,15 +136,31 @@ class QueueDepthTrigger:
 
 @dataclass
 class FeedbackTrigger:
-    """Application-layer baseline: reacts to receiver reports (loss ratio),
-    which arrive every report interval instead of instantly."""
-    up: float = 0.05   # escalate above 5% loss
+    """Application-layer baseline: an AP that adapts from receiver loss reports
+    instead of its own queue. Two inherent limits vs the queue trigger, both
+    fundamental rather than tunable: (1) it sees loss only AFTER frames were
+    already dropped downstream, and (2) only once per report interval.
+
+    Uses fast-up / slow-down hysteresis (escalate on the first high-loss
+    report, de-escalate only after `hold_reports` sustained low-loss reports)
+    so it is a fair controller, not a strawman that oscillates every report.
+    The remaining gap to the queue trigger is the signal itself, which is
+    exactly what H2 is about."""
+    up: float = 0.05         # escalate above 5% observed loss
     down: float = 0.01
+    hold_reports: int = 4    # sustained low-loss reports before de-escalating
     level: int = 0
+    _low_streak: int = 0
 
     def on_report(self, loss_ratio: float) -> int:
         if loss_ratio > self.up and self.level < 3:
             self.level += 1
-        elif loss_ratio < self.down and self.level > 0:
-            self.level -= 1
+            self._low_streak = 0
+        elif loss_ratio < self.down:
+            self._low_streak += 1
+            if self._low_streak >= self.hold_reports and self.level > 0:
+                self.level -= 1
+                self._low_streak = 0
+        else:
+            self._low_streak = 0
         return self.level

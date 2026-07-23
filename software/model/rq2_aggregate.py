@@ -38,7 +38,7 @@ def main() -> None:
     for pair in args.dirs:
         label, path = pair.split("=", 1)
         root = Path(path)
-        adapts, ovf_gap, ovf_total = [], [], []
+        adapts, ovf_total, lvl_changes = [], [], []
         per_run = []
         for run in sorted(d for d in root.iterdir() if (d / "events.jsonl").exists()):
             res = analyze(run)
@@ -46,27 +46,27 @@ def main() -> None:
             for sd in res["stepdowns"]:
                 if sd["adapt_ms"] is not None:
                     adapts.append(sd["adapt_ms"])
-            ovf_gap.append(res["overflow_in_gap"])
             ovf_total.append(res["overflow_total"])
+            lvl_changes.append(res["level_changes"])
             per_run.append({"run": run.name, **res})
         a_m, a_med, a_s = stat(adapts)
-        og_m, og_med, _ = stat(ovf_gap)
         ot_m, ot_med, _ = stat(ovf_total)
+        lc_m, lc_med, _ = stat(lvl_changes)
         report[label] = {"n_runs": len(per_run), "n_adapted": len(adapts),
                          "adapt_ms_mean": a_m, "adapt_ms_median": a_med,
                          "adapt_ms_std": a_s,
-                         "overflow_in_gap_mean": og_m,
-                         "overflow_total_mean": ot_m,
+                         "overflow_total_mean": ot_m, "overflow_total_median": ot_med,
+                         "level_changes_mean": lc_m, "level_changes_median": lc_med,
                          "runs": per_run}
 
     args.out.write_text(json.dumps(report, indent=2))
     print(f"{'trigger':<10}{'adapted':>8}{'adapt_ms(med)':>16}"
-          f"{'ovf_in_gap':>12}{'ovf_total':>11}")
+          f"{'ovf_total':>11}{'lvl_chg':>9}")
     for label, r in report.items():
-        a = (f"{r['adapt_ms_median']:.0f} (μ{r['adapt_ms_mean']:.0f})"
+        a = (f"{r['adapt_ms_median']:.0f} (mu{r['adapt_ms_mean']:.0f})"
              if r["adapt_ms_median"] is not None else "NA")
         print(f"{label:<10}{r['n_adapted']:>3}/{r['n_runs']:<4}{a:>16}"
-              f"{r['overflow_in_gap_mean']:>12.0f}{r['overflow_total_mean']:>11.0f}")
+              f"{r['overflow_total_mean']:>11.0f}{r['level_changes_median']:>9.0f}")
     print(f"\nwrote {args.out}")
 
 

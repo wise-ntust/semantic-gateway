@@ -59,6 +59,7 @@ def analyze(run_dir: Path) -> dict:
     return {"trigger": trigger, "stepdowns": results,
             "overflow_total": len(overflow),
             "overflow_in_gap": overflow_in_gap,
+            "level_changes": len(levels),  # stability: fewer = steadier control
             "total_dropped": summ.get("dropped"),
             "final_level": levels[-1][1] if levels else 0}
 
