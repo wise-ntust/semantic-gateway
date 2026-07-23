@@ -31,11 +31,11 @@ below random uniform, showing task-awareness is the source of the gain.
 queue vs loss-feedback trigger, bandwidth step 60→18→60 KB/s, 5 seeds,
 real-time).
 
-**Headline**: queue-depth adapts in **196 ms** (median) and recovers to level 0
-every time; loss-feedback latches at max pressure and **never recovers**,
-because it cannot tell the AP's intended semantic drops from congestion loss
-and traps itself. Queue occupancy has a stable dead-band; end-to-end loss does
-not (75–83 vs 16–24 level changes).
+**Headline**: queue-depth is a clean signal — idle at ample bandwidth, escalates
+in ~196 ms under congestion, returns toward 0 on recovery. Loss-feedback is
+chronically unstable (oscillates even before congestion, never settles to 0;
+75–83 vs 16–24 level changes) because its signal conflates the AP's own semantic
+drops, I-frame-burst loss, and real congestion.
 
 **Claim status**: **H2 partially supported (characterization).** Direction and
 mechanism hold; no precise "N× faster" claim (emulated adapt_ms is noisy). The
@@ -66,10 +66,10 @@ Deferred to Phase 4 (ARM PS) and Phase 5 (openwifi PL), per roadmap.
   (uniform), or content-aware-but-task-blind (keyframe) dropping, at equal
   budget; the gain peaks (+12–16 pp) in the mid-budget regime. This is the
   headline result.
-- **H2 — partially supported (characterization).** Queue-depth is a faster and,
-  crucially, stable/self-correcting control signal; loss-feedback is confounded
-  by the policy's own drops and latches at max pressure. Direction holds; the
-  precise, hardware-grade comparison is deferred to H5.
+- **H2 — partially supported (characterization).** Queue-depth is a stable,
+  self-correcting control signal; loss-feedback is chronically unstable because
+  its signal conflates policy drops, burst loss, and congestion. Direction holds;
+  the precise, hardware-grade comparison is deferred to H5.
 - **H3 — not supported (honest negative).** For this model + codec, forwarding
   compressed frames beats forwarding int8 features at every AP-side split. This
   sharpens scope: the value is in dropping at the AP, not feature extraction.
