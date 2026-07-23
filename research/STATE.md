@@ -1,5 +1,5 @@
 # semantic-gateway 研究 pipeline 狀態
-stage: experiments
+stage: writing
 venue: 不投稿。deliverable = 可重現實驗 + REPORT.md（對齊 coding-gateway 格式）
 
 ## Gates
@@ -7,7 +7,7 @@ venue: 不投稿。deliverable = 可重現實驗 + REPORT.md（對齊 coding-gat
 - [x] G2 環境 + 實驗計畫核准（2026-07-22）
 - [x] G3 實作驗收（2026-07-22，smoke 通過，H1 機制可見）
 - [ ] G3 實作驗收（pipeline end-to-end 會動）
-- [ ] G4 實驗結果過目（數據真實且足夠）
+- [x] G4 實驗結果過目（2026-07-23，三 RQ 數據充足，使用者核准進報告）
 - [ ] G5 報告草稿核准
 - [ ] G6 review 迴圈收斂（winlab:cc 老師視角 review 取代 PC reviewers）
 
@@ -63,6 +63,12 @@ venue: 不投稿。deliverable = 可重現實驗 + REPORT.md（對齊 coding-gat
 - RQ2（H2）：部分成立（characterization）。queue trigger 196ms 中位數且穩定恢復；loss-feedback 卡最高壓不恢復（分不清自己的語意 drop 和壅塞 loss，自我鎖死）。queue occupancy 有 dead-band，loss 沒有。精確倍數不宣稱，硬體版留 H5。
 - 修掉 4 個 harness bug：END 卡死、sudo ~ 陷阱、feedback 路由、feedback 震盪
 - 三個軟體 RQ 全跑完，results.md 收齊，等 G4
+
+## Stage 6 寫作（2026-07-23）
+- REPORT.md 完成：成果報告型骨架（project-docs 風格），繁中，3 圖 3 RQ + 誠實邊界段
+- 圖表：research/figures/（Okabe-Ito CVD-safe，已過 validator），make_figures.py 可重現
+- 圖抓到並修正 RQ2 過度宣稱（feedback 是震盪不是 latch）
+- 下一步：G5 報告草稿核准 → G6 winlab:cc review
 
 ## Open questions
 - 津貼與 ZedBoard 排程（等 twisc 確定）
