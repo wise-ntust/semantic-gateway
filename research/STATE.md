@@ -70,6 +70,11 @@ venue: 不投稿。deliverable = 可重現實驗 + REPORT.md（對齊 coding-gat
 - 圖抓到並修正 RQ2 過度宣稱（feedback 是震盪不是 latch）
 - 下一步：G5 報告草稿核准 → G6 winlab:cc review
 
+## Stage 7 review（2026-07-23）
+- winlab:cc（建超視角）review：判「有東西」等級會過關，輸在 framing 不在數據
+- 已套用修訂：in-network computing 定位句（stage1=演算法/stage2=部署）、keyframe<uniform 升正式結果二、decodability 實測數字（tail@100% 30-40 支不可解 vs semantic 0）、RQ2 headline 改機制（不打稻草人）、RQ3「不成立」scope 到 int8、誠實邊界補 int8-only+bytes-only+temporal-layer frame-diff fallback 接 H4、H5 hedge 砍到 2 次、README RQ 編號對齊 H1-H5 + roadmap status 更新
+- cc 點名口試最會被電：temporal layer 可實現性（H1 命門，已在誠實邊界接 frame-diff+H4）
+
 ## Open questions
 - 津貼與 ZedBoard 排程（等 twisc 確定）
 - feature path（RQ3）的 feature 壓縮格式：int8 quantization 起手，top-k 備選（實作時定）

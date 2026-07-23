@@ -24,11 +24,12 @@ Make the drop decision semantic, and make it cheap enough to run on an AP.
 
 ## Research Questions
 
-| # | Question |
-|---|----------|
-| RQ1 | Which drop policy preserves accuracy best under a bandwidth budget: uniform, size-based, or sender-tagged? |
-| RQ2 | Under the same budget, is it better to forward the surviving frames, or extracted features? (latency + accuracy) |
-| RQ3 | Can the decision run on the AP itself (ZedBoard ARM PS, openwifi) with negligible forwarding overhead? |
+| # | Question | Hypothesis |
+|---|----------|-----------|
+| RQ1 | Which drop policy preserves accuracy best under a bandwidth budget: tail, uniform, keyframe, or semantic? | H1 |
+| RQ2 | Does a link-local queue-depth trigger drive adaptation better than an application-layer loss-feedback trigger? | H2 |
+| RQ3 | Under an equal budget, is it better to forward surviving frames or extracted features? | H3 |
+| RQ4 / RQ5 | Can the decision run on the AP itself: ZedBoard ARM PS (H4), then in the openwifi TX fabric (H5)? | H4 / H5 |
 
 ## Relation to coding-gateway
 
@@ -40,11 +41,13 @@ Same series, opposite direction. One adds redundancy to survive loss; the other 
 
 | Phase | Scope | Status |
 |-------|-------|--------|
-| 1 | Baseline pipeline: UCF101 + pretrained action-recognition model, RTP sender → proxy → receiver | planned |
-| 2 | Drop policies: uniform / size-based / sender-tagged, under emulated bandwidth (`tc netem`) | planned |
-| 3 | Frame vs feature: split-point and quantization sweep under an equal bandwidth budget | planned |
-| 4 | On-device: RTP-header drop on ZedBoard ARM PS (openwifi), as the sighting shot for Phase 5 | planned |
+| 1 | Baseline pipeline: UCF101 + pretrained action-recognition model, RTP sender → proxy → receiver | **done** |
+| 2 | Drop policies (RQ1) + trigger signal (RQ2), under emulated bandwidth | **done** |
+| 3 | Frame vs feature (RQ3): split-point + quantization sweep at equal budget | **done** |
+| 4 | On-device: RTP-header drop on ZedBoard ARM PS (openwifi), the sighting shot for Phase 5 | planned |
 | 5 | In-fabric: drop module inside the openwifi TX datapath (PL), plus the final report | planned |
+
+Phase 1 to 3 results are in [REPORT.md](REPORT.md). H1 supported strongly; H2 partial (characterization); H3 an honest negative that sharpens scope toward AP-side dropping.
 
 ## License
 
