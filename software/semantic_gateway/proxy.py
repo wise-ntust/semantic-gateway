@@ -58,6 +58,7 @@ class Proxy(asyncio.DatagramProtocol):
         self.transport: asyncio.DatagramTransport | None = None
         self.receiver_addr = (args.receiver_host, args.receiver_port)
         self.sender_addr = None
+        self.sender_done_t = None  # set when the sender's END arrives
         self.done = asyncio.get_running_loop().create_future()
 
     # -- ingress ---------------------------------------------------------
@@ -79,8 +80,11 @@ class Proxy(asyncio.DatagramProtocol):
             return
         if p.ptype == rtp.T_END:
             self.sender_addr = addr
-            self.queue.append(data)  # forward END through the queue
-            self.q.queue_bytes += len(data)
+            # Do NOT enqueue END: a control packet must not get stuck behind a
+            # backlog that cannot drain (an overloaded link would hang forever).
+            # drain() delivers it directly once the queue empties or a bounded
+            # grace period expires.
+            self.sender_done_t = time.monotonic()
             return
 
         key = (p.video_id, p.frame_idx)
@@ -132,8 +136,18 @@ class Proxy(asyncio.DatagramProtocol):
                 tokens -= len(data)
                 self.sent_bytes += len(data)
                 self.transport.sendto(data, self.receiver_addr)
-                if rtp.unpack(data).ptype == rtp.T_END:
-                    self.events.write({"ev": "end", "t": t})
+            # sender finished: deliver END once the queue drains, or once a
+            # bounded grace period expires (an overloaded link cannot drain).
+            if self.sender_done_t is not None:
+                grace_over = (now - self.sender_done_t) > self.args.grace
+                if not self.queue or grace_over:
+                    end = rtp.Packet(ptype=rtp.T_END, video_id=0, frame_idx=0,
+                                     layer=0, diff_q=0, frag_idx=0, frag_cnt=1,
+                                     last_frag=True, send_ns=0, payload_len=0)
+                    self.transport.sendto(rtp.pack(end), self.receiver_addr)
+                    self.events.write({"ev": "end", "t": t,
+                                       "queue_left": self.q.queue_bytes,
+                                       "grace_over": grace_over})
                     self.done.set_result(True)
                     return
             if self.trigger_mode == "queue":
@@ -184,6 +198,9 @@ def main():
                     help="size queue from base link rate x this latency; "
                          "0 = use --queue-cap")
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--grace", type=float, default=5.0,
+                    help="seconds to keep draining after the sender ends "
+                         "before giving up on the backlog and sending END")
     ap.add_argument("--listen-host", default="0.0.0.0")
     ap.add_argument("--listen-port", type=int, default=5000)
     ap.add_argument("--receiver-host", default="127.0.0.1")
