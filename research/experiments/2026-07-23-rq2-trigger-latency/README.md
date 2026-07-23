@@ -20,37 +20,41 @@ hardware (H5). What we can test here is the *shape* of the two control signals.
 
 ## Result
 
-| trigger | adapt to step (median) | level changes | recovered after step-up? |
-|---------|:----------------------:|:-------------:|:------------------------:|
-| queue-depth | **196 ms** (4/5 runs 112–315 ms) | 16–24 | **yes**, all 5 → level 0 |
-| loss-feedback | 537 ms (33 ms–2.0 s, very noisy) | 75–83 | **no**, all 5 pinned at level 3 |
+See `../figures/rq2_pressure_over_time.png` for one representative pair.
+
+| trigger | behaviour at ample bandwidth (0–15 s) | under congestion (15–35 s) | after recovery (35 s+) | level changes |
+|---------|:-------------------------------------:|:--------------------------:|:----------------------:|:-------------:|
+| queue-depth | steady at 0 | escalates to 3 (~196 ms median) | returns to ~0 | 16–24 |
+| loss-feedback | already oscillating 0↔3 | ~2, still bouncing | keeps oscillating 2↔3, never settles to 0 | 75–83 |
 
 overflow drops = 0 for both in this scenario.
 
 ## Takeaway
 
-- **Queue-depth is a clean control signal.** It reacts in ~200 ms and, when
-  bandwidth returns, de-escalates all the way back to level 0 every time.
-- **Loss-feedback latches at maximum pressure and never recovers.** The reason
-  is fundamental, not a tuning bug: the receiver's loss estimate cannot
-  distinguish the AP's *intended* semantic drops from *congestion* loss. Once
-  the trigger escalates, the policy drops most frames by design; the receiver
-  reports that as loss; the feedback trigger reads it as continuing congestion
-  and stays pinned — a self-reinforcing trap. Queue occupancy reflects the true
-  backlog regardless of policy drops, so it has no such confound.
-- The loss-feedback arm also oscillates 3–4× more (75–83 vs 16–24 level
-  changes): end-to-end loss has no stable operating point, queue occupancy does
-  (its hysteresis dead-band).
+- **Queue-depth is a clean control signal.** Idle (level 0) when bandwidth is
+  ample, escalates within ~200 ms when the link drops, and returns toward 0
+  when bandwidth recovers. It tracks the true backlog.
+- **Loss-feedback is chronically unstable.** It oscillates across the whole
+  run — including *before* any congestion, when bandwidth is ample — and never
+  settles back to no-pressure after recovery (75–83 level changes vs 16–24).
+  The reason is fundamental, not a tuning bug: the receiver's loss estimate
+  conflates three things it cannot tell apart — the AP's *intended* semantic
+  drops, transient I-frame-burst loss, and real *congestion*. Any of them reads
+  as "loss," so a loss-driven controller chases its own tail. Queue occupancy
+  reflects the real backlog regardless of policy drops, so it has no confound
+  and a stable operating point (its hysteresis dead-band).
 
 ## Claim status: H2 partially supported (characterization)
 
-Supported in direction and mechanism: the local queue signal is faster in the
-common case and, more importantly, *stable and self-correcting* where the
-end-to-end loss signal is confounded by the policy's own drops. **Not** claimed
-as a precise "N× faster" result — the emulated adapt_ms is noisy (feedback was
-already oscillating before the step, contaminating the first-reaction time; the
+The defensible positive result is the **queue-depth trigger's clean behaviour**:
+fast, stable, self-correcting. The loss-feedback arm illustrates *why* a local
+signal is preferable — the end-to-end signal is confounded — but it is not a
+tuned production controller, and the emulated `adapt_ms` is too noisy for a
+precise "N× faster" claim (feedback is already oscillating before the step; the
 queue arm has one content-driven 3.0 s outlier at seed 3). The definitive
-trigger comparison, using real retry / MCS / queue signals, is H5 on hardware.
+trigger comparison, using real retry / MCS / queue signals, is **H5 on
+hardware**. H2 was flagged at G1 as the hardest hypothesis to emulate; this
+result is consistent with that and does not overreach.
 
 ## Limitations
 
