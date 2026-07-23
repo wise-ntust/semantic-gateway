@@ -28,6 +28,26 @@ or *features* extracted from them? Where is the crossover?
 int8 quantization is near-lossless: accuracy is 0.951 at every split (clean
 ceiling 0.957).
 
+### Latency axis (compute placement)
+
+`model/measure_split_latency.py`, per 16-frame clip (sandbox CPU, random-init;
+timing is weight-independent, so absolute ms are a proxy for the *trend*, not
+edge hardware; GPU numbers pending):
+
+| path | sender compute | receiver compute | feature bytes |
+|------|---------------:|-----------------:|--------------:|
+| frame | 0.0 ms | 64.6 ms (full model) | 24 KB |
+| feature @ stem | 1.8 ms | 68.6 ms | 3211 KB |
+| feature @ layer2 | 50.1 ms | 10.5 ms | 803 KB |
+| feature @ layer3 | 55.3 ms | 4.2 ms | 201 KB |
+| feature @ layer4 | 64.1 ms | 0.0 ms | 50 KB |
+| feature @ avgpool | 63.6 ms | 0.0 ms | 520 B |
+
+Sender compute climbs monotonically with split depth (1.8 → 64 ms). The only
+split that shrinks the feature below the frames (avgpool) makes the sender run
+essentially the whole model. **There is no split that is both small-bytes and
+low-sender-compute** — the two axes agree.
+
 ## Takeaway
 
 - **H3 not supported in the intended regime.** For every split shallow enough

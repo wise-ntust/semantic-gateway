@@ -1,0 +1,56 @@
+{
+  "device": "cpu",
+  "iters": 20,
+  "weights": "random-init",
+  "rows": [
+    {
+      "path": "frame",
+      "split": null,
+      "sender_ms": 0.0,
+      "receiver_ms": 64.613,
+      "e2e_compute_ms": 64.613
+    },
+    {
+      "path": "feature",
+      "split": "stem",
+      "sender_ms": 1.807,
+      "receiver_ms": 68.603,
+      "e2e_compute_ms": 70.41
+    },
+    {
+      "path": "feature",
+      "split": "layer1",
+      "sender_ms": 44.956,
+      "receiver_ms": 22.297,
+      "e2e_compute_ms": 67.253
+    },
+    {
+      "path": "feature",
+      "split": "layer2",
+      "sender_ms": 50.135,
+      "receiver_ms": 10.543,
+      "e2e_compute_ms": 60.678
+    },
+    {
+      "path": "feature",
+      "split": "layer3",
+      "sender_ms": 55.319,
+      "receiver_ms": 4.215,
+      "e2e_compute_ms": 59.534
+    },
+    {
+      "path": "feature",
+      "split": "layer4",
+      "sender_ms": 64.073,
+      "receiver_ms": 0.022,
+      "e2e_compute_ms": 64.094
+    },
+    {
+      "path": "feature",
+      "split": "avgpool",
+      "sender_ms": 63.608,
+      "receiver_ms": 0.011,
+      "e2e_compute_ms": 63.619
+    }
+  ]
+}
