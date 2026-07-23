@@ -75,8 +75,15 @@ venue: 不投稿。deliverable = 可重現實驗 + REPORT.md（對齊 coding-gat
 - 已套用修訂：in-network computing 定位句（stage1=演算法/stage2=部署）、keyframe<uniform 升正式結果二、decodability 實測數字（tail@100% 30-40 支不可解 vs semantic 0）、RQ2 headline 改機制（不打稻草人）、RQ3「不成立」scope 到 int8、誠實邊界補 int8-only+bytes-only+temporal-layer frame-diff fallback 接 H4、H5 hedge 砍到 2 次、README RQ 編號對齊 H1-H5 + roadmap status 更新
 - cc 點名口試最會被電：temporal layer 可實現性（H1 命門，已在誠實邊界接 frame-diff+H4）
 
+## RQ3 latency 軸補測（2026-07-23）
+- 原本「深 split 加 sender latency」是推論，補跑 measure_split_latency.py 變量測
+- 結果（sandbox CPU 相對計時，weight-free）：sender 運算 stem 1.8ms → layer4 64ms 單調上升；avgpool(唯一 bytes 小於 frame) sender 要 64ms=整個模型
+- 兩軸(bytes + sender compute)同結論：沒有 split 是 bytes 小又 sender 運算低
+- **待辦**：king 掉出校網(no route to host)，GPU 絕對延遲值待 king 回線補測(script 已就緒，--device cuda --ckpt)
+
 ## Open questions
 - 津貼與 ZedBoard 排程（等 twisc 確定）
+- king GPU 絕對延遲數字（等 king 回線）
 - feature path（RQ3）的 feature 壓縮格式：int8 quantization 起手，top-k 備選（實作時定）
 - queue cap 深度：改成以鏈路 ms 計（AP 實務 50-200ms），Stage 4 定案；第一次真實 smoke 用固定 256KB 導致 latency 偏高
 - semantic vs uniform 在真實 frame 大小下 usable% 接近，勝負要靠 accuracy（L2 frame 很小，byte 上省不多）
