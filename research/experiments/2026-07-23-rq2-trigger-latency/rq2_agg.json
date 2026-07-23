@@ -1,0 +1,188 @@
+{
+  "queue": {
+    "n_runs": 5,
+    "n_adapted": 5,
+    "adapt_ms_mean": 763.12,
+    "adapt_ms_median": 195.6,
+    "adapt_ms_std": 1271.7902527539673,
+    "overflow_total_mean": 0.0,
+    "overflow_total_median": 0,
+    "level_changes_mean": 20.4,
+    "level_changes_median": 22,
+    "runs": [
+      {
+        "run": "semantic-bstep-s0",
+        "trigger": "queue",
+        "stepdowns": [
+          {
+            "t_step": 15.000647814013064,
+            "adapt_ms": 314.8,
+            "drops_in_gap": 0
+          }
+        ],
+        "overflow_total": 0,
+        "overflow_in_gap": 0,
+        "level_changes": 24,
+        "total_dropped": 705,
+        "final_level": 0
+      },
+      {
+        "run": "semantic-bstep-s1",
+        "trigger": "queue",
+        "stepdowns": [
+          {
+            "t_step": 15.000440103001893,
+            "adapt_ms": 111.9,
+            "drops_in_gap": 0
+          }
+        ],
+        "overflow_total": 0,
+        "overflow_in_gap": 0,
+        "level_changes": 24,
+        "total_dropped": 727,
+        "final_level": 0
+      },
+      {
+        "run": "semantic-bstep-s2",
+        "trigger": "queue",
+        "stepdowns": [
+          {
+            "t_step": 15.000913946016226,
+            "adapt_ms": 195.6,
+            "drops_in_gap": 0
+          }
+        ],
+        "overflow_total": 0,
+        "overflow_in_gap": 0,
+        "level_changes": 22,
+        "total_dropped": 705,
+        "final_level": 0
+      },
+      {
+        "run": "semantic-bstep-s3",
+        "trigger": "queue",
+        "stepdowns": [
+          {
+            "t_step": 15.000420502008637,
+            "adapt_ms": 3034.2,
+            "drops_in_gap": 0
+          }
+        ],
+        "overflow_total": 0,
+        "overflow_in_gap": 0,
+        "level_changes": 16,
+        "total_dropped": 634,
+        "final_level": 0
+      },
+      {
+        "run": "semantic-bstep-s4",
+        "trigger": "queue",
+        "stepdowns": [
+          {
+            "t_step": 15.001064810989192,
+            "adapt_ms": 159.1,
+            "drops_in_gap": 0
+          }
+        ],
+        "overflow_total": 0,
+        "overflow_in_gap": 0,
+        "level_changes": 16,
+        "total_dropped": 694,
+        "final_level": 0
+      }
+    ]
+  },
+  "feedback": {
+    "n_runs": 5,
+    "n_adapted": 5,
+    "adapt_ms_mean": 834.9,
+    "adapt_ms_median": 537.4,
+    "adapt_ms_std": 908.8479245726427,
+    "overflow_total_mean": 0.0,
+    "overflow_total_median": 0,
+    "level_changes_mean": 77.8,
+    "level_changes_median": 77,
+    "runs": [
+      {
+        "run": "semantic-bstep-s0",
+        "trigger": "feedback",
+        "stepdowns": [
+          {
+            "t_step": 15.00064224700327,
+            "adapt_ms": 32.8,
+            "drops_in_gap": 0
+          }
+        ],
+        "overflow_total": 0,
+        "overflow_in_gap": 0,
+        "level_changes": 75,
+        "total_dropped": 3180,
+        "final_level": 3
+      },
+      {
+        "run": "semantic-bstep-s1",
+        "trigger": "feedback",
+        "stepdowns": [
+          {
+            "t_step": 15.000989031977952,
+            "adapt_ms": 1537.0,
+            "drops_in_gap": 1
+          }
+        ],
+        "overflow_total": 0,
+        "overflow_in_gap": 0,
+        "level_changes": 75,
+        "total_dropped": 3175,
+        "final_level": 3
+      },
+      {
+        "run": "semantic-bstep-s2",
+        "trigger": "feedback",
+        "stepdowns": [
+          {
+            "t_step": 15.000658359989757,
+            "adapt_ms": 2033.7,
+            "drops_in_gap": 1
+          }
+        ],
+        "overflow_total": 0,
+        "overflow_in_gap": 0,
+        "level_changes": 77,
+        "total_dropped": 3217,
+        "final_level": 3
+      },
+      {
+        "run": "semantic-bstep-s3",
+        "trigger": "feedback",
+        "stepdowns": [
+          {
+            "t_step": 15.000870152987773,
+            "adapt_ms": 33.6,
+            "drops_in_gap": 0
+          }
+        ],
+        "overflow_total": 0,
+        "overflow_in_gap": 0,
+        "level_changes": 83,
+        "total_dropped": 3182,
+        "final_level": 3
+      },
+      {
+        "run": "semantic-bstep-s4",
+        "trigger": "feedback",
+        "stepdowns": [
+          {
+            "t_step": 15.000730052997824,
+            "adapt_ms": 537.4,
+            "drops_in_gap": 0
+          }
+        ],
+        "overflow_total": 0,
+        "overflow_in_gap": 0,
+        "level_changes": 79,
+        "total_dropped": 3176,
+        "final_level": 3
+      }
+    ]
+  }
+}

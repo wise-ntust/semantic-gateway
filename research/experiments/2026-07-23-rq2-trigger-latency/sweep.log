@@ -1,0 +1,70 @@
+base stream rate: 32533 B/s (videos=24 speed=x1 queue=100ms)
+[1/5] semantic b=step s=0 rate=0:60000,15:18000,35:60000
+sender: 3360 frames / 24 videos in 130.3s (speed x1.0)
+receiver: 2655 complete frames across 24 videos -> /tmp/sgw-rq2/queue/semantic-bstep-s0/trace.jsonl
+  "received_pct": 79.02,
+  "usable_pct": 23.12,
+  "lat_ms_mean": 9.78,
+[2/5] semantic b=step s=1 rate=0:60000,15:18000,35:60000
+sender: 3360 frames / 24 videos in 130.3s (speed x1.0)
+receiver: 2633 complete frames across 22 videos -> /tmp/sgw-rq2/queue/semantic-bstep-s1/trace.jsonl
+  "received_pct": 78.36,
+  "usable_pct": 19.64,
+  "lat_ms_mean": 9.04,
+[3/5] semantic b=step s=2 rate=0:60000,15:18000,35:60000
+sender: 3360 frames / 24 videos in 130.3s (speed x1.0)
+receiver: 2655 complete frames across 21 videos -> /tmp/sgw-rq2/queue/semantic-bstep-s2/trace.jsonl
+  "received_pct": 79.02,
+  "usable_pct": 22.2,
+  "lat_ms_mean": 10.86,
+[4/5] semantic b=step s=3 rate=0:60000,15:18000,35:60000
+sender: 3360 frames / 24 videos in 130.3s (speed x1.0)
+receiver: 2726 complete frames across 20 videos -> /tmp/sgw-rq2/queue/semantic-bstep-s3/trace.jsonl
+  "received_pct": 81.13,
+  "usable_pct": 18.18,
+  "lat_ms_mean": 10.2,
+[5/5] semantic b=step s=4 rate=0:60000,15:18000,35:60000
+sender: 3360 frames / 24 videos in 130.3s (speed x1.0)
+receiver: 2666 complete frames across 20 videos -> /tmp/sgw-rq2/queue/semantic-bstep-s4/trace.jsonl
+  "received_pct": 79.35,
+  "usable_pct": 16.64,
+  "lat_ms_mean": 9.32,
+sweep complete under /tmp/sgw-rq2/queue (5 runs)
+base stream rate: 32533 B/s (videos=24 speed=x1 queue=100ms)
+[1/5] semantic b=step s=0 rate=0:60000,15:18000,35:60000
+sender: 3360 frames / 24 videos in 130.3s (speed x1.0)
+receiver: 180 complete frames across 24 videos -> /tmp/sgw-rq2/feedback/semantic-bstep-s0/trace.jsonl
+  "received_pct": 5.36,
+  "usable_pct": 1.01,
+  "lat_ms_mean": 70.8,
+[2/5] semantic b=step s=1 rate=0:60000,15:18000,35:60000
+sender: 3360 frames / 24 videos in 130.3s (speed x1.0)
+receiver: 185 complete frames across 22 videos -> /tmp/sgw-rq2/feedback/semantic-bstep-s1/trace.jsonl
+  "received_pct": 5.51,
+  "usable_pct": 0.92,
+  "lat_ms_mean": 32.51,
+[3/5] semantic b=step s=2 rate=0:60000,15:18000,35:60000
+sender: 3360 frames / 24 videos in 130.3s (speed x1.0)
+receiver: 143 complete frames across 21 videos -> /tmp/sgw-rq2/feedback/semantic-bstep-s2/trace.jsonl
+  "received_pct": 4.26,
+  "usable_pct": 0.98,
+  "lat_ms_mean": 47.62,
+[4/5] semantic b=step s=3 rate=0:60000,15:18000,35:60000
+sender: 3360 frames / 24 videos in 130.3s (speed x1.0)
+receiver: 178 complete frames across 21 videos -> /tmp/sgw-rq2/feedback/semantic-bstep-s3/trace.jsonl
+  "received_pct": 5.3,
+  "usable_pct": 0.89,
+  "lat_ms_mean": 41.92,
+[5/5] semantic b=step s=4 rate=0:60000,15:18000,35:60000
+sender: 3360 frames / 24 videos in 130.3s (speed x1.0)
+receiver: 184 complete frames across 21 videos -> /tmp/sgw-rq2/feedback/semantic-bstep-s4/trace.jsonl
+  "received_pct": 5.48,
+  "usable_pct": 1.55,
+  "lat_ms_mean": 54.21,
+sweep complete under /tmp/sgw-rq2/feedback (5 runs)
+trigger    adapted   adapt_ms(med)  ovf_total  lvl_chg
+queue       5/5        196 (mu763)          0       22
+feedback    5/5        537 (mu835)          0       77
+
+wrote /tmp/sgw-rq2/rq2_agg.json
+RQ2 SWEEP COMPLETE

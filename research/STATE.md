@@ -58,6 +58,12 @@ venue: 不投稿。deliverable = 可重現實驗 + REPORT.md（對齊 coding-gat
 - 資料：research/experiments/2026-07-23-rq1-policy-sweep/，results.md 已寫
 - 無 claim 被推翻
 
+## RQ2 + RQ3 結果（2026-07-23）
+- RQ3（H3）：不成立，誠實負結果。傳 frame 全勝，最深 conv split(layer4) feature 仍是 frame 的 2.1 倍，只有 avgpool(整網搬 sender) 才小。收緊故事到 AP 丟棄。
+- RQ2（H2）：部分成立（characterization）。queue trigger 196ms 中位數且穩定恢復；loss-feedback 卡最高壓不恢復（分不清自己的語意 drop 和壅塞 loss，自我鎖死）。queue occupancy 有 dead-band，loss 沒有。精確倍數不宣稱，硬體版留 H5。
+- 修掉 4 個 harness bug：END 卡死、sudo ~ 陷阱、feedback 路由、feedback 震盪
+- 三個軟體 RQ 全跑完，results.md 收齊，等 G4
+
 ## Open questions
 - 津貼與 ZedBoard 排程（等 twisc 確定）
 - feature path（RQ3）的 feature 壓縮格式：int8 quantization 起手，top-k 備選（實作時定）

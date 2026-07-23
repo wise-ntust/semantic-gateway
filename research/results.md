@@ -25,14 +25,35 @@ below random uniform, showing task-awareness is the source of the gain.
 
 **Claim status**: **H1 supported, strongly.**
 
-## RQ2 — trigger latency (H2)
+## RQ2 — trigger signal (H2)
 
-Not yet run. Harness ready (`--trigger queue|feedback`, `--rate-spec` for
-bandwidth steps). Next up.
+**Run**: `experiments/2026-07-23-rq2-trigger-latency/` (semantic policy,
+queue vs loss-feedback trigger, bandwidth step 60→18→60 KB/s, 5 seeds,
+real-time).
+
+**Headline**: queue-depth adapts in **196 ms** (median) and recovers to level 0
+every time; loss-feedback latches at max pressure and **never recovers**,
+because it cannot tell the AP's intended semantic drops from congestion loss
+and traps itself. Queue occupancy has a stable dead-band; end-to-end loss does
+not (75–83 vs 16–24 level changes).
+
+**Claim status**: **H2 partially supported (characterization).** Direction and
+mechanism hold; no precise "N× faster" claim (emulated adapt_ms is noisy). The
+definitive test needs real link-layer signals (retry/MCS) on hardware — H5.
 
 ## RQ3 — frame vs feature (H3)
 
-Not yet run. Harness ready (`model/extract_features.py`, split-point + quant).
+**Run**: `experiments/2026-07-23-rq3-frame-vs-feature/` (6 split points, int8,
+303 videos).
+
+**Headline**: no split shallow enough for AP-side computing beats the frame
+path — the deepest conv split (layer4) is still 2.1× the compressed frames,
+shallower up to 133×. Only avgpool (whole net at sender = edge inference) is
+smaller. A modern codec compresses frames better than naive int8 compresses
+activations.
+
+**Claim status**: **H3 not supported.** Honest negative; sharpens scope toward
+AP-side dropping (RQ1). No RQ1 claim depends on it.
 
 ## RQ4 / RQ5 — on-device (H4 / H5)
 
@@ -40,11 +61,19 @@ Deferred to Phase 4 (ARM PS) and Phase 5 (openwifi PL), per roadmap.
 
 ## Overall read
 
-- **Supported now**: H1 — semantic (task-aware, layer-structured) dropping at
-  the AP preserves AI accuracy far better than blind (tail), thinning
-  (uniform), or content-aware-but-task-blind (keyframe) dropping, under an
-  equal bandwidth budget. The mid-budget regime is where it matters most.
-- **Not yet tested**: H2, H3 (harness in place). H4/H5 hardware, later phases.
-- **No contradicted claims.** Nothing needs to shrink. keyframe underperforming
-  uniform is a bonus finding that sharpens the story vs prior content-aware
-  in-network work.
+- **H1 — strongly supported.** Semantic (task-aware, layer-structured) dropping
+  at the AP preserves AI accuracy far better than blind (tail), thinning
+  (uniform), or content-aware-but-task-blind (keyframe) dropping, at equal
+  budget; the gain peaks (+12–16 pp) in the mid-budget regime. This is the
+  headline result.
+- **H2 — partially supported (characterization).** Queue-depth is a faster and,
+  crucially, stable/self-correcting control signal; loss-feedback is confounded
+  by the policy's own drops and latches at max pressure. Direction holds; the
+  precise, hardware-grade comparison is deferred to H5.
+- **H3 — not supported (honest negative).** For this model + codec, forwarding
+  compressed frames beats forwarding int8 features at every AP-side split. This
+  sharpens scope: the value is in dropping at the AP, not feature extraction.
+- **No RQ1 claim shrinks.** keyframe < uniform and the H3 negative both sharpen
+  the story rather than weaken it: the win is specifically *task-aware layer
+  dropping at the AP*, differentiated from prior content-aware in-network work.
+- **Next**: H4/H5 on hardware (ARM PS then openwifi PL), later phases.
